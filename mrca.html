@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width">
+      <title>Book Search</title>
+
+      <!-- <link id="stylesheet"href="styleLight.css" rel="stylesheet" type="text/css"/> -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/fontawesome-free/js/all.min.js"></script>
+      <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/3176/3176396.png">
+      <link rel="stylesheet" type="text/css" href="./stylesheet.css">      
+    </head>
+
+    <body id="body" class="bg-light">
+
+    <!-- nav bar attempt -->  
+    <nav class="navbar navbar-expand-lg navbar-light" id="navBar">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Assignment 1</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link"  href="index.html">Book Search</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page"href="#">MRCA</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- end navbar attempt -->
+    <!-- form -->
+
+    <div id="mainContainer" class="container-lg p-3">
+      <div id="mrcaText">
+        <h1 style="display:inline;">MRCA Finder</h1> <button style="float:right; margin-bottom:0;" id="darkModeButton" class="btn btn-primary mb-2" onclick="darkModeButtonPress('mrca')" >Dark Mode</button>
+        <p id="performanceTime"></p>
+        <p>Enter the UID of the original or starting author, followed by the UID of the 'target' author. This will return how many 'jumps' or references it takes to get from the starting author to the target author.</p>
+      </div>
+      
+      <div>
+        <div class="mb-3">
+          <label id="startUidLabel" for="startUID" class="form-label">Starting UID</label>
+          <input class="form-control" id="startUID">
+        </div>
+        <div class="mb-3">
+          <label id="targetUidLabel" for="targetUID" class="form-label">Target UID</label>
+          <input class="form-control" id="targetUID">
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="Program.mrca();" >Submit</button> 
+      </div>
+      <div class="alert alert-info" role="alert" id="mrcaResult" style="visibility:hidden; margin-top:2%;"></div>
+    </div>
+
+    <!-- loading screen !-->
+      <div id="loadingCover"><p><b>LOADING...</b></p><div class='loadingSlider'></div><div class='loadingSlider' style='animation-delay: 0.2s'></div>
+      <script>
+        let target = document.getElementById('loadingCover').children[0].children[0];
+        let result = Array.from(target.innerHTML);
+        target.innerHTML = "";
+        for (let i = 0; i < result.length; i++) {
+          target.innerHTML += `<span class='loadingBounce' style='animation-delay: ${0.1 * i}s'>${result[i]}</span>`
+        }
+      </script>
+      <!-- end loading screen !-->
+
+        <!-- little script for the link params !-->
+        <script>
+          let urlParams = Object.fromEntries(window.location.search.substr(1).split("&").map(v=>v.split("=")))
+          let inputs = document.querySelectorAll("input");
+          inputs[0].value = urlParams["fromUID"] ?? ""
+          inputs[1].value = urlParams["toUID"] ?? ""
+          console.log(urlParams, inputs)
+        </script>
+
+    <!-- end form -->
+      <script src="mrcascript.js" type='module'></script>  
+      <script src="darkmode.js"></script>
+    </body>
+</html>

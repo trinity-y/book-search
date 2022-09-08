@@ -1,0 +1,109 @@
+/* main stylesheet */
+
+.dark-white { /* dark white background colour for search box */
+    background-color: #f0f0f0;
+}
+
+.dark-gray { /* dark gray background colour for search box */
+    background-color: #3f3f3f;
+}
+
+.dark-background { /* dark background colour for main body */
+    background-color: #212529;
+}
+
+.light-text { /* light text for dark mode */
+    color: #dcdfe3;
+}
+
+.dark-text { /* dark text for light mode */
+    color: #212529;
+}
+
+.dark-active-button {
+  background-color: #212529;
+  border-color: #000 #000 #000;
+}
+
+body.dark-background .nav-link.active {
+  color: white;
+  background-color: inherit;
+}
+
+#searchForm, .card, .carousel.slide {
+  box-shadow: #00000044 0px 0px 6px 6px;
+}
+
+#loadingCover {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(5px);
+  transition: top 1s ease-in;
+  z-index: 5
+}
+
+#loadingCover p {
+  text-align: center;
+  color: #00000088;
+  top: 30%;
+  font-size: 78px;
+  position: relative;
+}
+
+.loadingBounce {
+  animation: loadingBounce 1.2s;
+  animation-iteration-count: infinite;
+  display: inline-block;
+}
+
+@keyframes loadingBounce {
+  0% {
+    transform: translate(0px, 0px);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  50% {
+    transform: translate(0px, 36px);
+    animation-timing-function: cubic-bezier(0.6, 0, 1, 1);
+  }
+
+  100% {
+    transform: translate(0px, 0px)
+  }
+}
+
+.loadingSlider {
+  animation: loadingSlider 1.6s;
+  animation-iteration-count: infinite;
+  display: inline-block;
+  width: 48px;
+  height: 16px;
+  background-color: #00000088;
+  top: 30%;
+  left: calc(50vw - 160px - 48px);
+  position: relative;
+}
+
+@keyframes loadingSlider {
+  0% {
+    transform: translate(0px, 0px);
+    animation-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
+  }
+
+  50% {
+    transform: translate(320px, 0px);
+    animation-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+    animation-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
+  }
+}
+
+#navBar {
+  z-index: 10;
+}
